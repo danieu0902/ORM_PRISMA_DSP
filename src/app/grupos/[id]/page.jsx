@@ -21,14 +21,13 @@ async function PaginaGrupo({params}) {
 export default PaginaGrupo;
 
 
-// aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+//--------------------------componente de servidor------------------------------------
 async function Producto({id}) {
     const grupo= await prisma.grupo.findUnique({
         where:{
             id: +id
         }
     });
-    console.log(grupo);
         return ( 
             <div>
                 <p>{grupo.nombre}</p>
