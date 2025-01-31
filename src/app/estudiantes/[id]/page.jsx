@@ -1,3 +1,4 @@
+import Estudiante from '@/components/Estudiantes/Item';
 import{PrismaClient} from '@prisma/client';
 import { Suspense } from 'react';
 
@@ -21,19 +22,3 @@ async function PaginaEstudiante({params}) {
 export default PaginaEstudiante;
 
 
-//--------------------------componente de servidor------------------------------------
-async function Estudiante({id}) {
-    const estudiante= await prisma.estudiante.findUnique({
-        where:{
-            id: +id
-        }
-    });
-        return ( 
-            <div>
-                <p>{estudiante.nombre}</p>
-                <p>{estudiante.fecha_nacimiento.toLocaleDateString()}</p>
-                <p>{estudiante.foto}</p>
-                <p>{estudiante.tutor_legal}</p>
-            </div>
-         );
-}

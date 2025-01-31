@@ -1,7 +1,7 @@
-import{PrismaClient} from '@prisma/client';
-import { Suspense } from 'react';
 
-const prisma = new PrismaClient();
+import { Suspense } from 'react';
+import prisma from '@/lib/prisma';
+import Grupo from '@/components/Grupos/Item';
 
 
 async function PaginaGrupo({params}) {
@@ -9,8 +9,8 @@ async function PaginaGrupo({params}) {
     return(
         <div>
             <h1>DATOS DE PRODUCTO</h1>
-            <Suspense fallback={"obteniendo producto"}>
-                <Producto id={id} />
+            <Suspense fallback={"obteniendo grupo"}>
+                <Grupo id={id} />
             </Suspense>
         </div>
 
@@ -21,18 +21,3 @@ async function PaginaGrupo({params}) {
 export default PaginaGrupo;
 
 
-//--------------------------componente de servidor------------------------------------
-async function Producto({id}) {
-    const grupo= await prisma.grupo.findUnique({
-        where:{
-            id: +id
-        }
-    });
-        return ( 
-            <div>
-                <p>{grupo.nombre}</p>
-                <p>{grupo.tutor}</p>
-                <p>{grupo.aula}</p>
-            </div>
-         );
-}
